@@ -4,8 +4,8 @@ namespace WalletDeveloper.Library.Services
 {
     public class TransactionService : ITransactionService
     {
-        private Driver driver;
-        public TransactionService(Driver driver)
+        private WalletAPIDriver driver;
+        public TransactionService(WalletAPIDriver driver)
         {
             this.driver = driver;
         }

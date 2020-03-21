@@ -10,9 +10,9 @@ namespace WalletDeveloper.Library.Services
 {
     public class WalletService : IWalletService
     {
-        private Driver driver;
+        private WalletAPIDriver driver;
         private NetworkClient _networkClient;
-        public WalletService(Driver driver)
+        public WalletService(WalletAPIDriver driver)
         {
             this.driver = driver;
             _networkClient = new NetworkClient();

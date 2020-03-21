@@ -4,8 +4,8 @@ namespace WalletDeveloper.Library.Services
 {
     public class InternationalServie : IInternationalServie
     {
-        private Driver driver;
-        public InternationalServie(Driver driver)
+        private WalletAPIDriver driver;
+        public InternationalServie(WalletAPIDriver driver)
         {
             this.driver = driver;
         }

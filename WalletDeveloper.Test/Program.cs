@@ -12,7 +12,7 @@ namespace WalletDeveloper.Test
     {
         static async Task Main(string[] args)
         {
-            var driver = new Driver("https://sandbox.wallets.africa", "", "");
+            var driver = new WalletAPIDriver("https://sandbox.wallets.africa", "hfucj5jatq8h", "uvjqzm5xl6bw");
             var airtimeService = new AirtimeService(driver);
             var accountService = new AccountService(driver);
             var selfService = new SelfService(driver);

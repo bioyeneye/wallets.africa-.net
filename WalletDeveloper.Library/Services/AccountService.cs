@@ -11,10 +11,10 @@ namespace WalletDeveloper.Library.Services
 
     public class AccountService : IAccountService
     {
-        private Driver driver;
+        private WalletAPIDriver driver;
         private NetworkClient _networkClient;
 
-        public AccountService(Driver driver)
+        public AccountService(WalletAPIDriver driver)
         {
             this.driver = driver;
             _networkClient = new NetworkClient();

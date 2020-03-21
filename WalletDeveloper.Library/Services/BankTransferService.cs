@@ -12,10 +12,10 @@ namespace WalletDeveloper.Library.Services
     public class BankTransferService : IBankTransferService
     {
 
-        private Driver driver;
+        private WalletAPIDriver driver;
         private NetworkClient _networkClient;
 
-        public BankTransferService(Driver driver)
+        public BankTransferService(WalletAPIDriver driver)
         {
             this.driver = driver;
             _networkClient = new NetworkClient();

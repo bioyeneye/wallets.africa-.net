@@ -6,8 +6,8 @@ namespace WalletDeveloper.Library.Services
 {
     public class ThirdPartyService
     {
-        private Driver driver;
-        public ThirdPartyService(Driver driver)
+        private WalletAPIDriver driver;
+        public ThirdPartyService(WalletAPIDriver driver)
         {
             this.driver = driver;
         }

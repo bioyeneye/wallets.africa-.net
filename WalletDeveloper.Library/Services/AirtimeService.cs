@@ -12,9 +12,9 @@ namespace WalletDeveloper.Library.Services
 
     public class AirtimeService : IAirtimeService
     {
-        private Driver driver;
+        private WalletAPIDriver driver;
         private NetworkClient _networkClient;
-        public AirtimeService(Driver driver)
+        public AirtimeService(WalletAPIDriver driver)
         {
             this.driver = driver;
             _networkClient = new NetworkClient();

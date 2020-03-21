@@ -7,7 +7,7 @@ namespace WalletDeveloper.Library
     /// <summary>
     /// Initiate the library's credential and base url to use in access in the APIs 
     /// </summary>
-    public class Driver
+    public class WalletAPIDriver
     {
         public string PublicKey { get; private set; }
         public string SecretKey { get; private set; }
@@ -18,7 +18,7 @@ namespace WalletDeveloper.Library
         /// <param name="baseUrl">API base url which is usually staging and production</param>
         /// <param name="secretKey">Secret/Private key</param>
         /// <param name="publicKey">Public Key</param>
-        public Driver(string baseUrl, string secretKey, string publicKey)
+        public WalletAPIDriver(string baseUrl, string secretKey, string publicKey)
         {
             this.BaseUrl = baseUrl;
             this.SecretKey = secretKey;

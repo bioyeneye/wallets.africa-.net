@@ -4,8 +4,8 @@ namespace WalletDeveloper.Library.Services
 {
     public class CardService : ICardService
     {
-        private Driver driver;
-        public CardService(Driver driver)
+        private WalletAPIDriver driver;
+        public CardService(WalletAPIDriver driver)
         {
             this.driver = driver;
         }

@@ -11,10 +11,10 @@ namespace WalletDeveloper.Library.Services
 
     public class SelfService : ISelfService
     {
-        private Driver driver;
+        private WalletAPIDriver driver;
         private NetworkClient _networkClient;
 
-        public SelfService(Driver driver)
+        public SelfService(WalletAPIDriver driver)
         {
             this.driver = driver;
             _networkClient = new NetworkClient();
