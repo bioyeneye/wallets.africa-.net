@@ -1,14 +1,10 @@
-﻿using Flurl;
-using Flurl.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WalletDeveloper.Library.Constants;
-using Newtonsoft;
 using Newtonsoft.Json;
 
 namespace WalletDeveloper.Library.Proxy
@@ -46,7 +42,7 @@ namespace WalletDeveloper.Library.Proxy
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -89,7 +85,7 @@ namespace WalletDeveloper.Library.Proxy
             }
         }*/
 
-        public async Task<string> GetAsync(string path, object queryParams = null, object headers = null, object cookies = null)
+        /*public async Task<string> GetAsync(string path, object queryParams = null, object headers = null, object cookies = null)
         {
             try
             {
@@ -104,6 +100,6 @@ namespace WalletDeveloper.Library.Proxy
             {
                 throw ex;
             }
-        }
+        }*/
     }
 }

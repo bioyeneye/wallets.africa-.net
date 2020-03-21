@@ -43,6 +43,8 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 
+*.exe
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/

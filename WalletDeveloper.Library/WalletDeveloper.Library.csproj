@@ -2,11 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>false</SignAssembly>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <NeutralLanguage />
+    <Description>Wallets Africa API .NET Library</Description>
+    <Authors>Oyeneye Bolaji</Authors>
+    <PackageTags>Wallets Africa, Financial Servcie, API</PackageTags>
+    <PackageProjectUrl>https://github.com/bioyeneye/wallets.africa-.net</PackageProjectUrl>
+    <RepositoryType>https://github.com/bioyeneye/wallets.africa-.net</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Flurl.Http" Version="2.4.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>

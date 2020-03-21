@@ -33,7 +33,7 @@ namespace WalletDeveloper.Library.Services
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
     }
