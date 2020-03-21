@@ -9,28 +9,24 @@ using WalletDeveloper.Library.Services.Abstract;
 namespace WalletDeveloper.Library.Services
 {
 
-    public class SelfService : ISelfService
+    public class SelfService : BaseService, ISelfService
     {
-        private WalletAPIDriver driver;
-        private NetworkClient _networkClient;
-
-        public SelfService(WalletAPIDriver driver)
+        public SelfService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
-            _networkClient = new NetworkClient();
+
         }
 
         public async Task<SelfBalanceResponse> GetBalance(Currency currency = Currency.NGN)
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Self.GETBALANCE}";
+                var url = $"{BaseUrl}/{Endpoints.Self.GETBALANCE}";
                 var payload = new
                 {
                     Currency = currency.ToString(),
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<SelfBalanceResponse>(response);
@@ -45,7 +41,7 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Self.GETTRANSACTION}";
+                var url = $"{BaseUrl}/{Endpoints.Self.GETTRANSACTION}";
                 var payload = new
                 {
                     skip = skip,
@@ -53,10 +49,10 @@ namespace WalletDeveloper.Library.Services
                     dateFrom = from.ToString("yyyy-MM-dd"),
                     dateTo = to.ToString("yyyy-MM-dd"),
                     transactionType = transactionType,
-                    secretKey = this.driver.SecretKey,
+                    secretKey = this.SecretKey,
                     currency = currency.ToString()
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<SelfTransactionResponse>(response);
@@ -71,14 +67,14 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Self.VERIFYBVN}";
+                var url = $"{BaseUrl}/{Endpoints.Self.VERIFYBVN}";
                 var payload = new
                 {
                     bvn = bvn,
                     dateOfBirth = dateOfBirth,
-                    secretKey = this.driver.SecretKey,
+                    secretKey = this.SecretKey,
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<SelfVerifyBVNResponse>(response);

@@ -12,9 +12,9 @@ namespace WalletDeveloper.Library.Extensions
         public static IServiceCollection AddWalletAuthentication(this IServiceCollection services)
         {
 
-            services.AddTransient<WalletAPIDriver>(c=>
+            services.AddTransient<WalletAPIManager>(c=>
             {
-                return new WalletAPIDriver("", "", "");
+                return new WalletAPIManager("", "", "");
             });
             services.AddTransient<IAirtimeService, AirtimeService>();
             services.AddTransient<IBankTransferService, BankTransferService>();

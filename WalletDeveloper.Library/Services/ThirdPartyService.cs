@@ -4,12 +4,11 @@ using System.Text;
 
 namespace WalletDeveloper.Library.Services
 {
-    public class ThirdPartyService
+    public class ThirdPartyService : BaseService
     {
-        private WalletAPIDriver driver;
-        public ThirdPartyService(WalletAPIDriver driver)
+        public ThirdPartyService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
+
         }
     }
 }

@@ -2,12 +2,11 @@
 
 namespace WalletDeveloper.Library.Services
 {
-    public class TransactionService : ITransactionService
+    public class TransactionService : BaseService, ITransactionService
     {
-        private WalletAPIDriver driver;
-        public TransactionService(WalletAPIDriver driver)
+        public TransactionService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
+
         }
     }
 }

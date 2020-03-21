@@ -2,12 +2,11 @@
 
 namespace WalletDeveloper.Library.Services
 {
-    public class CardService : ICardService
+    public class CardService : BaseService, ICardService
     {
-        private WalletAPIDriver driver;
-        public CardService(WalletAPIDriver driver)
+        public CardService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
+
         }
     }
 }

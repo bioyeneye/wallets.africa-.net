@@ -9,28 +9,24 @@ using WalletDeveloper.Library.Services.Abstract;
 namespace WalletDeveloper.Library.Services
 {
 
-    public class AccountService : IAccountService
+    public class AccountService : BaseService, IAccountService
     {
-        private WalletAPIDriver driver;
-        private NetworkClient _networkClient;
-
-        public AccountService(WalletAPIDriver driver)
+        public AccountService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
-            _networkClient = new NetworkClient();
+
         }
 
         public async Task<AccountBVNResolveReponse> ResolveBVN(string bvn)
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Account.RESOLVEBVN}";
+                var url = $"{BaseUrl}/{Endpoints.Account.RESOLVEBVN}";
                 var payload = new
                 {
                     bvn = bvn,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<AccountBVNResolveReponse>(response);

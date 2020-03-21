@@ -2,12 +2,11 @@
 
 namespace WalletDeveloper.Library.Services
 {
-    public class InternationalServie : IInternationalServie
+    public class InternationalServie : BaseService, IInternationalServie
     {
-        private WalletAPIDriver driver;
-        public InternationalServie(WalletAPIDriver driver)
+        public InternationalServie(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
+
         }
     }
 }

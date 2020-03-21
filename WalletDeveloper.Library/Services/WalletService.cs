@@ -8,14 +8,11 @@ using WalletDeveloper.Library.Services.Abstract;
 
 namespace WalletDeveloper.Library.Services
 {
-    public class WalletService : IWalletService
+    public class WalletService : BaseService, IWalletService
     {
-        private WalletAPIDriver driver;
-        private NetworkClient _networkClient;
-        public WalletService(WalletAPIDriver driver)
+        public WalletService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
-            _networkClient = new NetworkClient();
+
         }
 
         public async Task<WalletAccountResponse> GenerateWallet(string firstname, string lastname, string email,string dateOfBirth, Currency currency = Currency.NGN)
@@ -23,7 +20,7 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.GENERATEWALLET}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.GENERATEWALLET}";
                 var payload = new
                 {
                     firstName =  firstname,
@@ -31,9 +28,9 @@ namespace WalletDeveloper.Library.Services
                     email  =  email,
                     dateOfBirth =  dateOfBirth,
                     currency = currency.ToString(),
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletAccountResponse>(response);
@@ -49,7 +46,7 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.CREATEWALLET}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.CREATEWALLET}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
@@ -59,9 +56,9 @@ namespace WalletDeveloper.Library.Services
                     email = email,
                     dateOfBirth = dateOfBirth,
                     currency = currency.ToString(),
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletAccountResponse>(response);
@@ -77,15 +74,15 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.CREDITWALLET}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.CREDITWALLET}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
                     amount = amount,
                     transactionReference = transactionReference,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletCreditDataResponse>(response);
@@ -101,15 +98,15 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.DEBITWALLET}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.DEBITWALLET}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
                     amount = amount,
                     transactionReference = transactionReference,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletDebitDataResponse>(response);
@@ -125,14 +122,14 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.VERIFYWALLET}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.VERIFYWALLET}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
                     otp = otp,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletVerifyResponse>(response);
@@ -148,14 +145,14 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.SETPASSWORD}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.SETPASSWORD}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
                     password = password,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletSetPasswordResponse>(response);
@@ -171,14 +168,14 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.SETPIN}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.SETPIN}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
                     transactionPin = pin,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletSetPinResponse>(response);
@@ -194,15 +191,15 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.VERIFYBVN}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.VERIFYBVN}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
                     dateOfBirth = dob,
                     bvn = bvn,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletAccountData>(response);
@@ -218,13 +215,13 @@ namespace WalletDeveloper.Library.Services
             //check for null for this properties
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.GETUSER}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.GETUSER}";
                 var payload = new
                 {
                     phoneNumber = phonenumber,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletUserDataResponse>(response);
@@ -239,14 +236,14 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.GETBALANCE}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.GETBALANCE}";
                 var payload = new
                 {
                     phoneNumber = phoneNumber,
                     Currency = currency.ToString(),
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletBalanceResponse>(response);
@@ -261,7 +258,7 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.WALLETTRANSACTIONS}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.WALLETTRANSACTIONS}";
                 var payload = new
                 {
                     phoneNumber,
@@ -270,10 +267,10 @@ namespace WalletDeveloper.Library.Services
                     dateFrom = from.ToString("yyyy-MM-dd"),
                     dateTo = to.ToString("yyyy-MM-dd"),
                     transactionType = transactionType,
-                    secretKey = this.driver.SecretKey,
+                    secretKey = this.SecretKey,
                     currency = currency.ToString()
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletTransactionResponse>(response);
@@ -288,13 +285,13 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.GENERATEACCOUNTNUMBER}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.GENERATEACCOUNTNUMBER}";
                 var payload = new
                 {
                     phoneNumber,
-                    secretKey = this.driver.SecretKey,
+                    secretKey = this.SecretKey,
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletAccountNumberDataResponse>(response);
@@ -309,13 +306,13 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Wallet.RETRIEVEACCOUNTNUMBER}";
+                var url = $"{BaseUrl}/{Endpoints.Wallet.RETRIEVEACCOUNTNUMBER}";
                 var payload = new
                 {
                     phoneNumber,
-                    secretKey = this.driver.SecretKey,
+                    secretKey = this.SecretKey,
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<WalletAccountNumberDataResponse>(response);

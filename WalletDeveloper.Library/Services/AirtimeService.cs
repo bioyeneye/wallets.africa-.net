@@ -10,29 +10,26 @@ using WalletDeveloper.Library.Services.Abstract;
 namespace WalletDeveloper.Library.Services
 {
 
-    public class AirtimeService : IAirtimeService
+    public sealed class AirtimeService : BaseService, IAirtimeService
     {
-        private WalletAPIDriver driver;
-        private NetworkClient _networkClient;
-        public AirtimeService(WalletAPIDriver driver)
+        public AirtimeService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
-            _networkClient = new NetworkClient();
+
         }
 
         public async Task<AirtimePurchaseResponse> PostAirtime(string phonenumber, decimal amount, string providercode)
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Airtime.PURCHASE}";
+                var url = $"{BaseUrl}/{Endpoints.Airtime.PURCHASE}";
                 var payload = new
                 {
                     Code = providercode,
                     Amount = amount,
                     PhoneNumber = phonenumber,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<AirtimePurchaseResponse>(response);
@@ -47,12 +44,12 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Airtime.GETPROVIDERS}";
+                var url = $"{BaseUrl}/{Endpoints.Airtime.GETPROVIDERS}";
                 var payload = new
                 {
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<AirtimeProviderResponse>(response);

@@ -1,0 +1,35 @@
+﻿//var account = await manager.AccountService.ResolveBVN("22231485915");
+
+                //airtime
+                //var getProviders = await manager.AirtimeService.GetProviders();
+                //var purchaseAirtime = await manager.AirtimeService.PostAirtime("08062986510", 200, "mtn");
+
+                //AccountService
+                //var bvnResolveResponse = await manager.AccountService.ResolveBVN("00000000000");
+
+                //self
+                //var verifybvn = await manager.SelfService.VerifyBVN("22231485915", "14-04-1992");
+                //var balance = await manager.SelfService.GetBalance();
+                //var transaction = await manager.SelfService.GetTransactions(DateTime.Now.AddDays(-20), DateTime.Now, Library.Constants.TransactionType.ALL, Library.Constants.Currency.NGN, 0, 40);
+
+
+                //bank
+                //var banks = await manager.BankService.GetBanks();
+                //var accountEnquiry = await manager.BankService.PostAccountEnquiry("0114003495", "058");
+                //var transfer = await manager.BankService.PostDisburse("0114003495", "JOHN DOE", "058", 100, "", "123456781UIH");
+                //var transferStatus = await bankService.PostStatusCheck("123456781UIH");
+
+
+                //var generateWallet = await manager.WalletService.GenerateWallet("oyeneye", "simi", "bioyeneye+new@gmail.com", "1992-06-13", Library.Constants.Currency.NGN);
+                //var createWallet = await manager.WalletService.CreateWallet("2348062986510", "oyeneye", "simi", "password", "bioyeneye+new@gmail.com", "1992-06-13", Library.Constants.Currency.NGN);
+                //var creditResponse = await manager.WalletService.CreditWallet("2348062986510", 100, "1234567Q78AW");
+                //var debitResponse = await manager.WalletService.DebitWallet("2348062986510", 100, "1234567Q78AW");
+                //var debitResponse = await manager.WalletService.Verify("01047658843", "607014");
+                //var setPassword = await manager.WalletService.SetPassword("13990205533", "QWASWE1223@");
+                //var setPin = await manager.WalletService.SetPin("13990205533", "1234");
+                //var verifyBVN = await manager.WalletService.VerifyBVN("08057898539", "22231485913", "14-04-1992");
+                //var wallet = await manager.WalletService.GetWallet("08057898539");
+                //var walletBalance = await manager.WalletService.GetBalance("08057898539");
+                //var transaction = await manager.WalletService.GetTransactions("08062986510", DateTime.Now.AddDays(-20), DateTime.Now, Library.Constants.TransactionType.ALL, Library.Constants.Currency.NGN, 0, 40);
+                //var generateAccountNumber = await manager.WalletService.GenerateAccountNumber("08062986510");
+                //var retrieveAccountNumber = await manager.WalletService.RetrieveAccountNumber("08062986510");

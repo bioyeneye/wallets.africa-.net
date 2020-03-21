@@ -9,28 +9,23 @@ using WalletDeveloper.Library.Services.Abstract;
 
 namespace WalletDeveloper.Library.Services
 {
-    public class BankTransferService : IBankTransferService
+    public class BankTransferService : BaseService, IBankTransferService
     {
-
-        private WalletAPIDriver driver;
-        private NetworkClient _networkClient;
-
-        public BankTransferService(WalletAPIDriver driver)
+        public BankTransferService(string baseurl, string secret, string publickey) : base(baseurl, secret, publickey)
         {
-            this.driver = driver;
-            _networkClient = new NetworkClient();
+
         }
 
         public async Task<List<Banks>> GetBanks()
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Bank.GETBANKS}";
+                var url = $"{BaseUrl}/{Endpoints.Bank.GETBANKS}";
                 var payload = new
                 {
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<List<Banks>>(response);
@@ -45,7 +40,7 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Bank.BANKACCOUNTTRANSFER}";
+                var url = $"{BaseUrl}/{Endpoints.Bank.BANKACCOUNTTRANSFER}";
                 var payload = new
                 {
                     BankCode = bankcode,
@@ -53,9 +48,9 @@ namespace WalletDeveloper.Library.Services
                     AccountName = accountaname,
                     TransactionReference = reference,
                     Amount =  amount,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response =  await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<BankTransferResponse>(response);
@@ -70,14 +65,14 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Bank.BANKACCOUNTENQUIRY}";
+                var url = $"{BaseUrl}/{Endpoints.Bank.BANKACCOUNTENQUIRY}";
                 var payload = new
                 {
                     AccountNumber = accountnumber,
                     BankCode = bankcode,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<BankAccountEnquiryResponse>(response);
@@ -92,13 +87,13 @@ namespace WalletDeveloper.Library.Services
         {
             try
             {
-                var url = $"{driver.BaseUrl}/{Endpoints.Bank.BANKACCOUNTTRANSFERSTATUS}";
+                var url = $"{BaseUrl}/{Endpoints.Bank.BANKACCOUNTTRANSFERSTATUS}";
                 var payload = new
                 {
                     TransactionReference = reference,
-                    SecretKey = this.driver.SecretKey
+                    SecretKey = this.SecretKey
                 };
-                var header = HtttpHelper.GeneratedAuthorizationHeader(this.driver.PublicKey);
+                var header = HtttpHelper.GeneratedAuthorizationHeader(this.PublicKey);
                 var response = await _networkClient.PostAsync(url, payload, headers: header);
 
                 return JsonConvert.DeserializeObject<BankTransferStatusResponse>(response);
