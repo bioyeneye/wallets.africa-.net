@@ -45,7 +45,7 @@ namespace WalletDeveloper.Library.Models.Responses
     {
         public APIResponse Response { get; set; }
         public SelTransactionData Data { get; set; }
-        public bool TransactionsSucceesful
+        public bool TransactionFetchedSuccessful
         {
             get
             {
